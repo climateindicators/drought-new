@@ -1,0 +1,109 @@
+indicator:
+  name: Drought
+  slug: drought
+  publisher: U.S. Environmental Protection Agency
+  source_page: https://19january2025snapshot.epa.gov/climate-indicators/climate-change-indicators-drought/index.html
+  technical_documentation: https://19january2025snapshot.epa.gov/system/files/documents/2024-06/drought_documentation.pdf
+  rights: Public domain, work of the U.S. Government (17 U.S.C. 105)
+datasets:
+- file: drought_palmer_index.csv
+  figure: Figure 1
+  figure_title: Figure 1. Average Drought Conditions in the Contiguous 48 States According
+    to the Palmer Index, 1895–2023
+  source_file: drought_fig-1.csv
+  source_sha256: a17f2c8f7709336083bc9834c6d519ab289ae7c01fc7ea99e21583e4e1c336c9
+  source_encoding: windows-1252
+  data_source: NOAA, 2024
+  web_update: June 2024
+  unit: Palmer Drought Severity Index
+  rows: 258
+  columns:
+  - name: year
+    type: integer
+    description: Calendar year, 1895 through 2023.
+  - name: series
+    type: string
+    description: 'Series key: `annual` for the single-year average, `nine_year` for
+      the nine-year weighted average EPA draws as the thicker line.'
+  - name: series_label
+    type: string
+    description: EPA's own column header for the series, reproduced verbatim.
+  - name: value
+    type: number
+    description: Palmer Drought Severity Index averaged over the whole area of the
+      contiguous 48 states. Zero is the 1931-1990 average, negative is drier, positive
+      is wetter.
+- file: drought_spei_national.csv
+  figure: Figure 2
+  figure_title: Figure 2. Average Drought Conditions Across the Contiguous 48 States
+    According to the SPEI, 1900–2023
+  source_file: drought_fig-2.csv
+  source_sha256: 5e4a2b0a42b2fbd909acb7b062bca21b9a51014e20f9eba70426cc242a8c2d47
+  source_encoding: UTF-8-BOM
+  data_source: WestWide Drought Tracker, 2024
+  web_update: June 2024
+  unit: SPEI value
+  rows: 124
+  columns:
+  - name: year
+    type: integer
+    description: Calendar year, 1900 through 2023. The value is the average of the
+      60 months ending in June of that year.
+  - name: value
+    type: number
+    description: Five-year Standardized Precipitation Evapotranspiration Index averaged
+      over the whole area of the contiguous 48 states. Negative is drier than average,
+      positive is wetter.
+- file: drought_spei_change.csv
+  figure: Figure 3
+  figure_title: Figure 3. Average Change in Drought (Five-Year SPEI) in the Contiguous
+    48 States, 1900–2023
+  source_file: drought_fig-3.csv
+  source_sha256: 9812ae4ff2fc1f8bb2be92aec479bc18ef8dd97901f640a379a8ce589802ec17
+  source_encoding: UTF-8-BOM
+  data_source: WestWide Drought Tracker, 2024
+  web_update: June 2024
+  unit: SPEI value
+  rows: 344
+  columns:
+  - name: climate_division
+    type: string
+    description: 'NOAA climate division, keyed as EPA publishes it: division name,
+      underscore, two-letter state code.'
+  - name: division
+    type: string
+    description: The division-name half of `climate_division`.
+  - name: state
+    type: string
+    description: The postal-code half of `climate_division`. All 48 contiguous states
+      appear.
+  - name: value
+    type: number
+    description: Total change in the five-year SPEI from 1900 to 2023, from the long-term
+      average rate of change. Positive is increased moisture, negative is drier.
+- file: drought_monitor_area.csv
+  figure: Figure 4
+  figure_title: Figure 4. U.S. Lands Under Drought Conditions, 2000-2023
+  source_file: drought_fig-4.csv
+  source_sha256: c7977c0f53f1f33f821515d546c18203f5493cbb14fafc64c00f088125312557
+  source_encoding: UTF-8
+  data_source: National Drought Mitigation Center, 2024
+  web_update: June 2024
+  unit: Percent of U.S. land area
+  rows: 6260
+  columns:
+  - name: date
+    type: date
+    description: The weekly U.S. Drought Monitor issue date, ISO 8601, 2000-01-04
+      through 2023-12-26.
+  - name: category
+    type: string
+    description: U.S. Drought Monitor severity class, D0 through D4.
+  - name: category_label
+    type: string
+    description: EPA's own column header for the class, reproduced verbatim.
+  - name: value
+    type: number
+    description: Percent of U.S. land area, the 50 states plus Puerto Rico, in that
+      class. The five classes partition the dry area, so their sum is the share that
+      was at least abnormally dry.
