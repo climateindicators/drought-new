@@ -54,10 +54,25 @@ must produce byte-identical output.
 `data-raw/*.csv`, EPA's published per-figure downloads, go to `R/build_data.R`,
 which writes the tidy CSVs and `data/meta.yml`.
 
-TODO: list each figure this build produces, one bullet each, naming the output
-file, the series it carries, its coverage, its units, and whether it appears on
-EPA's published indicator page. Any figure that does not appear there must say
-so here and in `data-raw/PROVENANCE.md`.
+All four figures appear on EPA's published indicator page, and each one produces
+a single tidy long-format CSV:
+
+- `drought_palmer_index.csv` (Figure 1) carries two series, `annual` and
+  `nine_year`, over 1895-2023, in Palmer Drought Severity Index units.
+- `drought_spei_national.csv` (Figure 2) carries one series over 1900-2023, in
+  five-year SPEI units.
+- `drought_spei_change.csv` (Figure 3) carries one value for each of the 344
+  NOAA climate divisions in the contiguous 48 states, the total change in
+  five-year SPEI from 1900 to 2023.
+- `drought_monitor_area.csv` (Figure 4) carries the five U.S. Drought Monitor
+  classes D0 through D4 for each of the 1,252 weekly issue dates from 2000-01-04
+  to 2023-12-26, as a percent of U.S. land area.
+
+The five Drought Monitor classes partition the dry area rather than nesting, so
+their sum, not `D0` alone, is the share of the country that was at least
+abnormally dry. `tests/test-data.R` pins that reading against EPA's own Key
+Points, which is the only thing that would catch a rebuild reading them as
+cumulative.
 
 `data/meta.yml` is generated, never hand-edited. It is assembled inside
 `R/build_data.R` from each source file's own five-line preamble, so figure
